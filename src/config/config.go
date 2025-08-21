@@ -12,6 +12,9 @@ import (
 var (
 	StringConexaoBanco = ""
 	Porta              = 0
+
+	// SecreteKey é a chave do token
+	SecreteKey []byte
 )
 
 // Carregar vai inicializar as variaveis de ambientes
@@ -26,7 +29,7 @@ func Carregar() {
 	// Porta da API
 	Porta, erro = strconv.Atoi(os.Getenv("API_PORTA"))
 	if erro != nil {
-		Porta = 9000 // valor padrão
+		Porta = 7000 // valor padrão
 	}
 
 	// Monta string de conexão com todas variáveis
@@ -37,4 +40,6 @@ func Carregar() {
 		os.Getenv("MYSQLPORT"),
 		os.Getenv("MYSQLDATABASE"),
 	)
+
+	SecreteKey = []byte(os.Getenv("SECRETE"))
 }
